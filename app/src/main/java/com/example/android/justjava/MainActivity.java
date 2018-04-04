@@ -1,12 +1,3 @@
-
-/**
- * IMPORTANT: Make sure you are using the correct package name.
- * This example uses the package name:
- * package com.example.android.justjava
- * If you get an error when copying this code into Android studio, update it to match teh package name found
- * in the project's AndroidManifest.xml file.
- **/
-
 package com.example.android.justjava;
 
 import android.os.Bundle;
@@ -33,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        if(quantity == 0){
+            displayThanks("You must have more than zero coffees for an order.");
+            return;
+        }
+        displayThanks("Thank you for your order of " + quantity + " cup(s) of coffee for " +
+                NumberFormat.getCurrencyInstance().format(total) + "!");
         resetToStart();
         display(quantity);
         displayPrice(total);
@@ -78,5 +75,21 @@ public class MainActivity extends AppCompatActivity {
     public void resetToStart(){
         quantity = 0;
         updatePrice();
+    }
+
+    /**
+     * This method displays the given text on the screen.
+     */
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
+    }
+
+    /**
+     * This method displays a thank you message after ordering.
+     */
+    private void displayThanks(String givenString) {
+        TextView thanksTextView = (TextView) findViewById(R.id.thank_you_text_view);
+        thanksTextView.setText(givenString);
     }
 }
