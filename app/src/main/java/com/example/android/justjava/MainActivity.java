@@ -13,8 +13,10 @@ import java.text.NumberFormat;
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
+    public final double coffeePrice = 2.00;
+    public final double whippedCreamPrice = .25;
+    public final double chocolatePrice = .50;
     private int quantity = 0;
-    private double coffeePrice = 2.00;
     private double total = 0;
     private boolean hasWhippedCream = false;
     private boolean hasChocolate = false;
@@ -73,7 +75,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calculatePrice(){
-        total = (quantity * coffeePrice);
+        double extras;
+        extras = 0.00;
+        if(hasWhippedCream){
+            extras += whippedCreamPrice;
+        }
+        if(hasChocolate){
+            extras += chocolatePrice;
+        }
+        total = (quantity * (coffeePrice + extras));
     }
 
     public void resetToStart(){
@@ -120,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
     public void addWhippedCream(View view){
         CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
         hasWhippedCream = (whippedCreamCheckBox.isChecked());
+        calculatePrice();
+        displayPrice(total);
     }
 
     /*
@@ -128,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
     public void addChocolate(View view){
         CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
         hasChocolate = (chocolateCheckBox.isChecked());
+        calculatePrice();
+        displayPrice(total);
     }
 
     /*
