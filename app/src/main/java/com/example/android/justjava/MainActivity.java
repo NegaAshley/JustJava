@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private double coffeePrice = 2.00;
     private double total = 0;
     private boolean hasWhippedCream = false;
+    private boolean hasChocolate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +75,11 @@ public class MainActivity extends AppCompatActivity {
     public void resetToStart(){
         quantity = 0;
         CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        CheckBox chocolateCheckbox = (CheckBox) findViewById(R.id.chocolate_checkbox);
         whippedCreamCheckBox.setChecked(false);
+        chocolateCheckbox.setChecked(false);
         hasWhippedCream = false;
+        hasChocolate = false;
         calculatePrice();
     }
 
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         }
         givenText = "Name: Kaptain Kunal\nQuantity: " + quantity + "\nTotal: " +
                 NumberFormat.getCurrencyInstance().format(total) + "\nWhipped Cream: " +
-                hasWhippedCream + "\nThank you!";
+                hasWhippedCream + "\nChocolate: " + hasChocolate + "\nThank you!";
         thanksTextView.setText(givenText);
     }
 
@@ -110,5 +114,13 @@ public class MainActivity extends AppCompatActivity {
     public void addWhippedCream(View view){
         CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
         hasWhippedCream = (whippedCreamCheckBox.isChecked());
+    }
+
+    /*
+    Adds chocolate to order when checkbox is checked.
+     */
+    public void addChocolate(View view){
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        hasChocolate = (chocolateCheckBox.isChecked());
     }
 }
