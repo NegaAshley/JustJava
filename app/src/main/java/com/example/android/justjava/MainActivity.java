@@ -3,16 +3,19 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
 
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
-    int quantity = 0;
-    double coffeePrice = 2.00;
-    double total = 0;
+    private int quantity = 0;
+    private double coffeePrice = 2.00;
+    private double total = 0;
+    private boolean hasWhippedCream = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetToStart(){
         quantity = 0;
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        whippedCreamCheckBox.setChecked(false);
+        hasWhippedCream = false;
         calculatePrice();
     }
 
@@ -93,7 +99,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         givenText = "Name: Kaptain Kunal\nQuantity: " + quantity + "\nTotal: " +
-                NumberFormat.getCurrencyInstance().format(total) + "\nThank you!";
+                NumberFormat.getCurrencyInstance().format(total) + "\nWhipped Cream: " +
+                hasWhippedCream + "\nThank you!";
         thanksTextView.setText(givenText);
+    }
+
+    /*
+    Adds whipped cream to order when checkbox is checked.
+     */
+    public void addWhippedCream(View view){
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        hasWhippedCream = (whippedCreamCheckBox.isChecked());
     }
 }
