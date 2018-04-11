@@ -15,10 +15,19 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <EditText
+            android:id="@+id/name_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textCapWords"
+        />
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#9E9E9E"
+                android:paddingTop="16dp"
                 android:textSize="16sp"
                 android:text="Toppings"
                 android:textAllCaps="true"

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private double total = 0;
     private boolean hasWhippedCream = false;
     private boolean hasChocolate = false;
+    private String userName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-
+        getUserName();
         createOrderSummary();
         resetToStart();
         displayQuantity(quantity);
@@ -39,15 +41,17 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given quantity value on the screen.
      */
     private void displayQuantity(int numCoffees) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + numCoffees);
+        String textForCoffee;
+        TextView quantityTextView = findViewById(R.id.quantity_text_view);
+        textForCoffee = "" + numCoffees;
+        quantityTextView.setText(textForCoffee);
     }
 
     /**
      * This method displays the given price on the screen.
      */
     private void displayPrice(double number) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
 
@@ -74,12 +78,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetToStart(){
         quantity = 0;
-        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
-        CheckBox chocolateCheckbox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
+        CheckBox chocolateCheckbox = findViewById(R.id.chocolate_checkbox);
         whippedCreamCheckBox.setChecked(false);
         chocolateCheckbox.setChecked(false);
         hasWhippedCream = false;
         hasChocolate = false;
+        userName = "";
+        resetUserEditText();
         calculatePrice();
     }
 
@@ -87,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
     }
 
@@ -95,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
      * This method displays a thank you message after ordering.
      */
     private void createOrderSummary() {
-        TextView thanksTextView = (TextView) findViewById(R.id.thank_you_text_view);
+        TextView thanksTextView = findViewById(R.id.thank_you_text_view);
         String givenText;
         if(quantity == 0){
             givenText = "You must have more than zero coffees for an order.";
             thanksTextView.setText(givenText);
             return;
         }
-        givenText = "Name: Kaptain Kunal\nQuantity: " + quantity + "\nTotal: " +
+        givenText = "Name: " + userName + "\nQuantity: " + quantity + "\nTotal: " +
                 NumberFormat.getCurrencyInstance().format(total) + "\nWhipped Cream: " +
                 hasWhippedCream + "\nChocolate: " + hasChocolate + "\nThank you!";
         thanksTextView.setText(givenText);
@@ -112,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     Adds whipped cream to order when checkbox is checked.
      */
     public void addWhippedCream(View view){
-        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
         hasWhippedCream = (whippedCreamCheckBox.isChecked());
     }
 
@@ -120,7 +126,23 @@ public class MainActivity extends AppCompatActivity {
     Adds chocolate to order when checkbox is checked.
      */
     public void addChocolate(View view){
-        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
         hasChocolate = (chocolateCheckBox.isChecked());
+    }
+
+    /*
+    Gets user name from EditText
+     */
+    public void getUserName(){
+        EditText userNameEditText = findViewById(R.id.name_view);
+        userName = userNameEditText.getText().toString();
+    }
+
+    /*
+    Reset name EditText
+     */
+    public void resetUserEditText(){
+        EditText userNameEditText = findViewById(R.id.name_view);
+        userNameEditText.setText("");
     }
 }
