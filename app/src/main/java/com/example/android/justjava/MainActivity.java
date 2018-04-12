@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 
@@ -13,9 +14,11 @@ import java.text.NumberFormat;
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
-    public final double coffeePrice = 2.00;
-    public final double whippedCreamPrice = .25;
-    public final double chocolatePrice = .50;
+    public final double coffeePrice = 5.00;
+    public final double whippedCreamPrice = 1.00;
+    public final double chocolatePrice = 2.00;
+    public final int minCoffees = 0;
+    public final int maxCoffees = 100;
     private int quantity = 0;
     private double total = 0;
     private boolean hasWhippedCream = false;
@@ -58,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increment(View view){
+        if(quantity >= maxCoffees){
+            Toast.makeText(getApplicationContext(), "You cannot order more than " + maxCoffees
+                    + " coffees.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         quantity += 1;
         calculatePrice();
         displayQuantity(quantity);
@@ -65,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decrement(View view){
-        if(quantity == 0){
+        if(quantity <= minCoffees){
+            Toast.makeText(getApplicationContext(), "You cannot order fewer than " + minCoffees
+                    + " coffees.", Toast.LENGTH_SHORT).show();
             return;
         }
         quantity -= 1;
