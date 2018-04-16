@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         getUserName();
         //createOrderSummary();
-        sendEmail("Your Just Java Order", createOrderSummaryText());
+        sendEmail("Just Java order for " + userName, createOrderSummaryText());
         resetToStart();
         displayQuantity(quantity);
         displayPrice(total);
