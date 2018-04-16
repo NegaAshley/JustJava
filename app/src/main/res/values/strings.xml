@@ -1,3 +1,69 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Just Java</string>
+
+    <!-- Header text for the list of toppings [CHAR LIMIT=20] -->
+    <string name="toppings">Toppings</string>
+
+    <!-- Hint for name text box [CHAR LIMIT=NONE] -->
+    <string name="name">Name</string>
+
+    <!-- Label text for whipped cream topping checkbox [CHAR LIMIT=NONE] -->
+    <string name="whipped_cream">Whipped Cream</string>
+
+    <!-- Label text for chocolate topping checkbox [CHAR LIMIT=NONE] -->
+    <string name="chocolate">Chocolate</string>
+
+    <!-- Header text for the quantity of coffees [CHAR LIMIT=NONE] -->
+    <string name="quantity">Quantity</string>
+
+    <!-- Header text for the order summary [CHAR LIMIT=NONE] -->
+    <string name="order_summary">Order Summary</string>
+
+    <!-- Label text for order button [CHAR LIMIT=20] -->
+    <string name="order_button_text">Order</string>
+
+    <!-- Thank you message for the order summary.  [CHAR LIMIT=NONE] -->
+    <string name="thank_you">Thank you!</string>
+
+    <!-- Error message for ordering too few coffees. It will be shown in the format of "You must
+    have more than 0 coffees for an order."  Where 0 is the minimum number of coffees.
+    [CHAR LIMIT=NONE] -->
+    <string name="error_min_coffees">You must have more than <xliff:g id="minNum" example="0">%d
+        </xliff:g> coffees for an order.</string>
+
+    <!-- Error message for ordering too many coffees. It will be shown in the format of "The maximum
+    number of coffees for an order is 100."  Where 100 is the maximum number of coffees.
+    [CHAR LIMIT=NONE] -->
+    <string name="error_max_coffees">The maximum number of coffees for an order is
+        <xliff:g id="maxNum" example="100">%d</xliff:g>.</string>
+
+    <!-- Name for the order summary.  It will be shown in the format of "Name: Amy" where Amy is the
+    user's name. [CHAR LIMIT=NONE]-->
+    <string name="order_summary_name">Name: <xliff:g id="name" example="Amy">%s</xliff:g></string>
+
+    <!-- Quantity for the order summary.  It will be shown in the format of "Quantity: 1" where 1 is
+    the quantity amount.  [CHAR LIMIT=NONE]-->
+    <string name="order_summary_quantity">Quantity: <xliff:g id="quantity" example="1">%d</xliff:g>
+        </string>
+
+    <!-- Total for the order summary.  It will be shown in the format of "Total: $1.00" where $1.00
+    is the total amount.  [CHAR LIMIT=NONE]-->
+    <string name="order_summary_total">Total: <xliff:g id="total" example="$1.00">%s</xliff:g>
+        </string>
+
+    <!-- Whether or not there is whipped cream.  It will be shown in the format of "Whipped Cream:
+    true" where true is whether or not there is whipped cream.  [CHAR LIMIT=NONE]-->
+    <string name="order_summary_whipped_cream">Whipped Cream: <xliff:g id="whipped_cream"
+        example="true">%s</xliff:g></string>
+
+    <!-- Whether or not there is chocoalte.  It will be shown in the format of "Chocolate:
+    true" where true is whether or not there is chocolate.  [CHAR LIMIT=NONE]-->
+    <string name="order_summary_chocolate">Chocolate: <xliff:g id="whipped_cream"
+        example="true">%s</xliff:g></string>
+
+    <!-- Email title for email sent with order.  It will be shown in the format of "Just Java order
+    for Amy" where Amy is the user name. [CHAR LIMIT=NONE]-->
+    <string name="confirmation_email_title">Just Java order for <xliff:g id="userName"
+        example="Amy">%s</xliff:g></string>
+
 </resources>

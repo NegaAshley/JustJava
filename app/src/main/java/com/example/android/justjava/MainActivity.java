@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         getUserName();
         //createOrderSummary();
-        sendEmail("Just Java order for " + userName, createOrderSummaryText());
+        sendEmail(getString(R.string.confirmation_email_title, userName), createOrderSummaryText());
         resetToStart();
         displayQuantity(quantity);
         displayPrice(total);
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void increment(View view){
         if(quantity >= maxCoffees){
-            Toast.makeText(getApplicationContext(), "You cannot order more than " + maxCoffees
-                    + " coffees.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.error_max_coffees,
+                    maxCoffees), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity += 1;
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void decrement(View view){
         if(quantity <= minCoffees){
-            Toast.makeText(getApplicationContext(), "You cannot order fewer than " + minCoffees
-                    + " coffees.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.error_min_coffees,
+                    minCoffees), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity -= 1;
@@ -118,12 +118,21 @@ public class MainActivity extends AppCompatActivity {
     private String createOrderSummaryText() {
         String givenText;
         if(quantity == 0){
-            givenText = "You must have more than zero coffees for an order.";
+            givenText = getString(R.string.error_min_coffees, minCoffees);
             return givenText;
         }
-        givenText = "Name: " + userName + "\nQuantity: " + quantity + "\nTotal: " +
-                NumberFormat.getCurrencyInstance().format(total) + "\nWhipped Cream: " +
-                hasWhippedCream + "\nChocolate: " + hasChocolate + "\nThank you!";
+        givenText = getString(R.string.order_summary_name, userName);
+        givenText += "\n";
+        givenText += getString(R.string.order_summary_quantity, quantity);
+        givenText += "\n";
+        givenText += getString(R.string.order_summary_total,
+                NumberFormat.getCurrencyInstance().format(total));
+        givenText += "\n";
+        givenText += getString(R.string.order_summary_whipped_cream, String.valueOf(hasWhippedCream));
+        givenText += "\n";
+        givenText += getString(R.string.order_summary_chocolate, String.valueOf(hasChocolate));
+        givenText += "\n";
+        givenText += getString(R.string.thank_you);
         return givenText;
     }
 
