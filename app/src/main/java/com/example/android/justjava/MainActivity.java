@@ -1,5 +1,7 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
         getUserName();
-        createOrderSummary();
+        //createOrderSummary();
+        sendEmail("Your Just Java Order", createOrderSummaryText());
         resetToStart();
         displayQuantity(quantity);
         displayPrice(total);
@@ -110,28 +113,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
-
-    /**
      * This method displays a thank you message after ordering.
      */
-    private void createOrderSummary() {
-        TextView thanksTextView = findViewById(R.id.thank_you_text_view);
+    private String createOrderSummaryText() {
         String givenText;
         if(quantity == 0){
             givenText = "You must have more than zero coffees for an order.";
-            thanksTextView.setText(givenText);
-            return;
+            return givenText;
         }
         givenText = "Name: " + userName + "\nQuantity: " + quantity + "\nTotal: " +
                 NumberFormat.getCurrencyInstance().format(total) + "\nWhipped Cream: " +
                 hasWhippedCream + "\nChocolate: " + hasChocolate + "\nThank you!";
-        thanksTextView.setText(givenText);
+        return givenText;
     }
 
     /*
@@ -168,5 +161,18 @@ public class MainActivity extends AppCompatActivity {
     public void resetUserEditText(){
         EditText userNameEditText = findViewById(R.id.name_view);
         userNameEditText.setText("");
+    }
+
+    /*
+    Uses intent to send email with order
+     */
+    public void sendEmail(String subject, String message){
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
     }
 }
