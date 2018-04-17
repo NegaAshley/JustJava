@@ -24,13 +24,9 @@
         />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#9E9E9E"
                 android:paddingTop="16dp"
-                android:textSize="16sp"
                 android:text="@string/toppings"
-                android:textAllCaps="true"
+                style="@style/HeaderTextStyle"
         />
 
          <CheckBox
@@ -57,13 +53,9 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#9E9E9E"
-            android:textSize="16sp"
             android:paddingTop="16dp"
             android:text="@string/quantity"
-            android:textAllCaps="true"
+            style="@style/HeaderTextStyle"
         />
 
         <LinearLayout
@@ -104,12 +96,8 @@
         </LinearLayout>
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
                 android:text="@string/order_summary"
-                android:textAllCaps="true"
+                style="@style/HeaderTextStyle"
             />
 
             <TextView
